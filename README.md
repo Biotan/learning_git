@@ -8,17 +8,23 @@
 对程序员A而言（A-home电脑）：  
 (1)安装git，打开Git Bash，执行以下命令进入：
 ```
-cd C\:Users\用户名\  
+cd ~
 ```
 查看是否有.ssh隐藏文件夹，如果没有可以新建一个  
 (2) 生成ssh公钥和密钥
 ```
+mkdir .ssh
 cd .ssh
 ssh-keygen -t rsa -C "tjingang@mail.ustc.edu.cn"
 ```
 请把以上命令的用户名替换成自己的账户名，邮箱是A自己的github账号邮箱，提醒你输入key的名称（随便），也可以不写，一路回车。 密码可以设置也可以不设置，设置的话以后每次在这台电脑上提交代码时都需要输入密码。 这时候在.ssh文件夹里有2个文件：id_rsa和id_rsa.pub，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。    
 (3)登陆GitHub网站，右上角个人信息点开，打开“Account settings”，“SSH and GPG Keys”页面，然后，点“Add SSH Key”，填上任意Title（建议用电脑名称A-home，方便以后账户下很多key的时候知道哪个key对应哪台机器），在Key文本框里粘贴id_rsa.pub文件的内容，点“Add Key”，你就应该看到已经添加的Key。为什么GitHub需要SSH Key呢？因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。（注意windows系统中你的当前命令行路径在哪儿，生成的密钥文件就在哪儿，因此如果没有提前进入.ssh文件夹，则需要将这2个文件复制到.ssh文件夹下面）
-(4) 在计算机上git界面上输入以下命令：
+(4) 使用如下命令查看ssh-key是否配置成功
+```
+ssh -T git@github.com
+```
+
+(5) 在计算机上git界面上输入以下命令：
 ```
 git config --global user.name "Biotan"
 git config --global user.email "tjingang@mail.ustc.edu.cn"
@@ -28,13 +34,21 @@ git config --global user.email "tjingang@mail.ustc.edu.cn"
 git config -l
 ```
 对程序员A（A-company电脑）和程序员B（B-company电脑）：  
-随便打开一个命令行窗口，输入如下命令：
-```
-ssh-keygen -t rsa -C "tjingang@mail.ustc.edu.cn"
-```
-ubuntu系统直接回默认创建~/.ssh文件夹，并把这两个文件生成在.ssh文件夹下面，所以可以直接生成。其他操作一样。
-一个github账户可以添加多个key，比如A用户的账户，分别把A-company和A-home的key都添加进去了，以后就可以在家或者在公司提交代码了。
+和以上操作一样，一个github账户可以添加多个key，比如A用户的账户，分别把A-company和A-home的key都添加进去了，以后就可以在家或者在公司提交代码了。
 
 ## 程序员A创建项目：
-（1）第一种方式：创建一个新的项目。登陆github上自己账户，然后点击右上角找到Your Repositories,然后进去点击new，输入名字，设置权限（可以是公开的，别人能看不能改，也可以是私有的，别人看不见，这里以公开为例）。  
-（2）第二章中方式：已经有一个代码工程，这时候在工程下面
+创建一个新的远程仓库。登陆github上自己账户，然后点击右上角找到Your Repositories,然后进去点击new，输入名字（以test_git为例），addME不勾选，设置权限（可以是公开的，别人能看不能改，也可以是私有的，别人看不见，这里以公开为例）。  
+A用户可以有两种方式来和远程仓库建立连接远程仓库：
+(1) 通过clone的方式，输入如下命令：
+```
+mkdir test_git
+cd test_git
+echo "# test_git" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:Biotan/test_git.git
+git push -u origin main
+```
+这里先创建了一个同名文件夹，然后新建了一个文件README.md，"git init"表示初始化，用git来跟踪当前工程的版本，这时候当前文件夹会生成一个.git文件夹负责记录各个分支以及各个版本信息，一般不动它。
