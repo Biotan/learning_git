@@ -59,4 +59,14 @@ git remote add origin git@github.com:Biotan/test_git.git
 git branch -M main
 git push -u origin main
 ```
-(3) 
+(3) 从远程clone下来：
+```
+git clone https://github.com/Biotan/test_git
+cd test_git
+echo "# test_git" >> README.md
+git add README.md
+git commit -m "first commit"
+git push
+```
+这时候省区了设置远程连接的麻烦，不过过程中需要输入创建这个工程的用户名和密码。且clone下来的默认分支就是“main”分支。
+
