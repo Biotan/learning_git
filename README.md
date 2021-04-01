@@ -68,5 +68,5 @@ git add README.md
 git commit -m "first commit"
 git push
 ```
-这时候省区了设置远程连接的麻烦，不过过程中需要输入创建这个工程的用户名和密码。且clone下来的默认分支就是“main”分支。
+这时候省去了设置远程连接的麻烦，不过过程中需要输入创建这个工程的用户名和密码。且clone下来的默认分支就是“main”分支。
 
