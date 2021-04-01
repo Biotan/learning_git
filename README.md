@@ -51,4 +51,5 @@ git branch -M main
 git remote add origin git@github.com:Biotan/test_git.git
 git push -u origin main
 ```
-这里先创建了一个同名文件夹，然后新建了一个文件README.md，"git init"表示初始化，用git来跟踪当前工程的版本，这时候当前文件夹会生成一个.git文件夹负责记录各个分支以及各个版本信息，一般不动它。
+这里先创建了一个同名文件夹，然后新建了一个文件README.md，"git init"表示初始化，用git来跟踪当前工程的版本，这时候当前文件夹会生成一个.git文件夹负责记录各个分支以及各个版本信息，一般不动它。“git add README.md”表示将当前改动提交到缓存区，git commit -m "first commit"表示将缓存区的改动提交到本地仓库（默认是master），并写上一些注释。
+“git branch -M main”表示将当前分支名改为main，因为github网站上创建的远程仓库现在默认名字为main，而git init创建的默认本地仓库名为master。“git remote add xxx”表示添加远程仓库连接，意思是origin以后就代表xxx，以后提交的时候就不用每次都输入网址了。“git push -u origin main”表示将本地的main分支提交到origin主机的main分支，同时-u表示指定origin为默认主机，后面就可以不加任何参数使用git push了。
