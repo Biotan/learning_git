@@ -53,3 +53,10 @@ git push -u origin main
 ```
 这里先创建了一个同名文件夹，然后新建了一个文件README.md，"git init"表示初始化，用git来跟踪当前工程的版本，这时候当前文件夹会生成一个.git文件夹负责记录各个分支以及各个版本信息，一般不动它。“git add README.md”表示将当前改动提交到缓存区，git commit -m "first commit"表示将缓存区的改动提交到本地仓库（默认是master），并写上一些注释。
 “git branch -M main”表示将当前分支名改为main，因为github网站上创建的远程仓库现在默认名字为main，而git init创建的默认本地仓库名为master。“git remote add xxx”表示添加远程仓库连接，意思是origin以后就代表xxx，以后提交的时候就不用每次都输入网址了。“git push -u origin main”表示将本地的main分支提交到origin主机的main分支，同时-u表示指定origin为默认主机，后面就可以不加任何参数使用git push了。不带任何参数的git push，默认只推送当前分支，这叫做simple方式。此外，还有一种matching方式，会推送所有有对应的远程分支的本地分支。Git 2.0版本之前，默认采用matching方法，现在改为默认采用simple方式。
+（2）如果当前已经有一个写好的工程，则可以直接在改工程下输入如下命令：
+```
+git remote add origin git@github.com:Biotan/test_git.git
+git branch -M main
+git push -u origin main
+```
+(3) 
