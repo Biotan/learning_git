@@ -5,7 +5,7 @@
 
 ## 程序员A和B各自在各自的电脑上配置好ssh的密钥：
 配置密钥是为了能本地和github服务器（自己账户）通信
-### 对程序员A而言（A-home电脑）：  
+对程序员A而言（A-home电脑）：  
 (1)安装git，打开Git Bash，执行以下命令进入：
 ```
 cd C\:Users/用户名/  
@@ -27,7 +27,7 @@ git config --global user.email "tjingang@mail.ustc.edu.cn"
 ```
 git config -l
 ```
-### 对程序员A（A-company电脑）和程序员B（B-company电脑）：  
+对程序员A（A-company电脑）和程序员B（B-company电脑）：  
 随便打开一个命令行窗口，输入如下命令：
 ```
 ssh-keygen -t rsa -C "tjingang@mail.ustc.edu.cn"
