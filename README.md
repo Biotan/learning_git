@@ -5,14 +5,35 @@
 
 ## 程序员A和B各自在各自的电脑上配置好ssh的密钥：
 配置密钥是为了能本地和github服务器（自己账户）通信
-对程序员A而言（A-home电脑）：  
-(1)安装git，打开Git Bash  
-(2)键入命令：ssh-keygen -t rsa -C "tjingang@mail.ustc.edu.com"，其中邮箱是A自己的github账号邮箱，提醒你输入key的名称，输入如id_rsa，也可以不写，一路回车。  
-(3)在A的账户下路径：C:\Users\Tjing\.ssh里面有2个文件：id_rsa和id_rsa.pub，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。  
-(4)登陆GitHub网站，右上角个人信息点开，打开“Account settings”，“SSH Keys”页面，然后，点“Add SSH Key”，填上任意Title（建议用电脑名称A-home，方便以后账户下很多key的时候知道哪个key对应哪台机器），在Key文本框里粘贴id_rsa.pub文件的内容，点“Add Key”，你就应该看到已经添加的Key。为什么GitHub需要SSH Key呢？因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。  
-对程序员A而言（A-company电脑）和用户B（B-company电脑）：  和上面一样，只是因为系统变了，文件目录变成了用户主目录：~/.ssh/  
+## 对程序员A而言（A-home电脑）：  
+(1)安装git，打开Git Bash，执行以下命令进入：
+```
+cd C\:Users/用户名/  
+```
+查看是否有.ssh隐藏文件夹，如果没有可以新建一个  
+(2) 生成ssh公钥和密钥
+```
+cd .ssh
+ssh-keygen -t rsa -C "tjingang@mail.ustc.edu.cn"
+```
+请把以上命令的用户名替换成自己的账户名，邮箱是A自己的github账号邮箱，提醒你输入key的名称（随便），也可以不写，一路回车。 密码可以设置也可以不设置，设置的话以后每次在这台电脑上提交代码时都需要输入密码。 这时候在.ssh文件夹里有2个文件：id_rsa和id_rsa.pub，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。    
+(3)登陆GitHub网站，右上角个人信息点开，打开“Account settings”，“SSH and GPG Keys”页面，然后，点“Add SSH Key”，填上任意Title（建议用电脑名称A-home，方便以后账户下很多key的时候知道哪个key对应哪台机器），在Key文本框里粘贴id_rsa.pub文件的内容，点“Add Key”，你就应该看到已经添加的Key。为什么GitHub需要SSH Key呢？因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。（注意windows系统中你的当前命令行路径在哪儿，生成的密钥文件就在哪儿，因此如果没有提前进入.ssh文件夹，则需要将这2个文件复制到.ssh文件夹下面）
+(4) 在计算机上git界面上输入以下命令：
+```
+git config --global user.name "bryan sun"
+git config --global user.email "hitsjt@gmail.com"
+```
+设置git自己的名字和电子邮件。这是因为Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址。注意git config命令的–global参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址，这时候不要加global关键字参数。可以使用如下命令查看当前的配置信息：
+```
+git config -l
+```
+## 对程序员A（A-company电脑）和程序员B（B-company电脑）：  
+随便打开一个命令行窗口，输入如下命令：
+```
+ssh-keygen -t rsa -C "tjingang@mail.ustc.edu.cn"
+```
+ubuntu系统直接回默认创建~/.ssh文件夹，并把这两个文件生成在.ssh文件夹下面，所以可以直接生成。其他操作一样。
 一个github账户可以添加多个key，比如A用户的账户，分别把A-company和A-home的key都添加进去了，以后就可以在家或者在公司提交代码了。
-(5) 在计算机上git界面上输入以下命令，表示
 
 ## 程序员A创建项目：
 （1）第一种方式：创建一个新的项目。登陆github上自己账户，然后点击右上角找到Your Repositories,然后进去点击new，输入名字，设置权限（可以是公开的，别人能看不能改，也可以是私有的，别人看不见，这里以公开为例）。  
