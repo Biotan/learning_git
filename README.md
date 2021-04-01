@@ -20,8 +20,8 @@ ssh-keygen -t rsa -C "tjingang@mail.ustc.edu.cn"
 (3)登陆GitHub网站，右上角个人信息点开，打开“Account settings”，“SSH and GPG Keys”页面，然后，点“Add SSH Key”，填上任意Title（建议用电脑名称A-home，方便以后账户下很多key的时候知道哪个key对应哪台机器），在Key文本框里粘贴id_rsa.pub文件的内容，点“Add Key”，你就应该看到已经添加的Key。为什么GitHub需要SSH Key呢？因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。（注意windows系统中你的当前命令行路径在哪儿，生成的密钥文件就在哪儿，因此如果没有提前进入.ssh文件夹，则需要将这2个文件复制到.ssh文件夹下面）
 (4) 在计算机上git界面上输入以下命令：
 ```
-git config --global user.name "bryan sun"
-git config --global user.email "hitsjt@gmail.com"
+git config --global user.name "Biotan"
+git config --global user.email "tjingang@mail.ustc.edu.cn"
 ```
 设置git自己的名字和电子邮件。这是因为Git是分布式版本控制系统，所以，每个机器都必须自报家门：你的名字和Email地址。注意git config命令的–global参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址，这时候不要加global关键字参数。可以使用如下命令查看当前的配置信息：
 ```
